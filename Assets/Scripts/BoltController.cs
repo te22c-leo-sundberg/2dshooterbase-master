@@ -7,6 +7,10 @@ public class BoltController : MonoBehaviour
 {
     [SerializeField]
     float speed = 25f;
+    public bool isExploding = false;
+
+    [SerializeField]
+    GameObject boltExplosion;
     void Start()
     {
 
@@ -30,6 +34,10 @@ public class BoltController : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Destroy(this.gameObject);
+            if (isExploding)
+            {
+                Instantiate(boltExplosion, transform.position, Quaternion.identity);
+            }
         }
     }
 }

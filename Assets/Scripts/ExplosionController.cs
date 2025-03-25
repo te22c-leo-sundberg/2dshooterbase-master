@@ -8,5 +8,4 @@ public class ExplosionController : MonoBehaviour
     {
         Destroy(this.gameObject, 0.3f);
     }
-
 }

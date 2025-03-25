@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
 
             controller.AddPoints(-20);
         }
-        else if (other.gameObject.tag == "Bolt")
+        else if (other.gameObject.tag == "Bolt" || other.gameObject.tag == "BoltExplosion")
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
             controller.AddPoints(10);
 
-            if (Random.Range(1,11) == 1)
+            if (Random.Range(1,7) == 1)
             {
                 int powerUpChance = Random.Range(1,4);
                 if (powerUpChance == 1)

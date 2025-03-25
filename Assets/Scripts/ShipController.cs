@@ -37,8 +37,14 @@ public class ShipController : MonoBehaviour
 
     bool explodingShots = false;
     float explosionPowerUpTimer = 0;
-    bool doubleShots = false;
     float shootingPowerUpTimer = 0;
+
+    [SerializeField]
+    GameObject explosionBuff;
+    [SerializeField]
+    GameObject shieldBuff;
+    [SerializeField]
+    GameObject shootingBuff;
 
 
     void Start()
@@ -65,33 +71,43 @@ public class ShipController : MonoBehaviour
         if (Input.GetAxisRaw("Fire1") > 0 && timeSinceLastShot > timeBetweenShots)
         {
             timeSinceLastShot = 0;
-            Instantiate(boltPrefab, gunPosition.position, Quaternion.identity);
+            var bolt = Instantiate(boltPrefab, gunPosition.position, Quaternion.identity);
+            boltPrefab.GetComponent<BoltController>().isExploding = explodingShots;
         }
+
 
         if (explosionPowerUpTimer > 0)
         {
+            explosionBuff.SetActive(true);
             explodingShots = true;
+            explosionPowerUpTimer -= 1 * Time.deltaTime;
         }
-        else
+        else if (explosionPowerUpTimer <= 0)
         {
             explodingShots = false;
+            explosionBuff.SetActive(false);
         }
 
         if (shootingPowerUpTimer > 0)
         {
-            doubleShots = true;
+            shootingBuff.SetActive(true);
+            timeBetweenShots = 0.25f;
+            shootingPowerUpTimer -= 1 * Time.deltaTime;
         }
-        else
+        else if (shootingPowerUpTimer <= 0)
         {
-            doubleShots = false;
+            shootingBuff.SetActive(false);
+            timeBetweenShots = 0.5f;
         }
 
         if (shield > 0)
         {
+            shieldBuff.SetActive(true);
             shieldSprite.SetActive(true);
         }
         else
         {
+            shieldBuff.SetActive(false);
             shieldSprite.SetActive(false);
         }
     }
@@ -100,13 +116,20 @@ public class ShipController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            print(currentHealth);
-            currentHealth--;
-            hpBar.value = currentHealth;
-            if (currentHealth <= 0)
+            if (shield <= 0)
             {
-                SceneManager.LoadScene(1);
+                currentHealth--;
+                hpBar.value = currentHealth;
+                if (currentHealth <= 0)
+                {
+                    SceneManager.LoadScene(1);
+                }
             }
+            else
+            {
+                shield--;
+            }
+
         }
     }
     // public void UpdatePoints(int points)
@@ -126,7 +149,7 @@ public class ShipController : MonoBehaviour
         }
         else if (boostType == "Shield")
         {
-            shield ++;
+            shield++;
         }
         else if (boostType == "Shooting")
         {

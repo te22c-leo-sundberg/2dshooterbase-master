@@ -8,6 +8,9 @@ TagManager:
   - Bolt
   - Ship
   - Explosion
+  - ExplosionBooster
+  - ShieldBooster
+  - ShootingBooster
   layers:
   - Default
   - TransparentFX
