@@ -14,6 +14,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     GameObject explosionPrefab;
 
+    [SerializeField]
+    GameObject explosionBoosterPrefab;
+
+    [SerializeField]
+    GameObject shieldBoosterPrefab;
+    
+    [SerializeField]
+    GameObject shootingBoosterPrefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +72,24 @@ public class EnemyController : MonoBehaviour
             ShipController controller = player.GetComponent<ShipController>();
 
             controller.AddPoints(10);
+
+            if (Random.Range(1,11) == 1)
+            {
+                int powerUpChance = Random.Range(1,4);
+                if (powerUpChance == 1)
+                {
+                    Instantiate(explosionBoosterPrefab, transform.position, Quaternion.identity);
+                }
+                else if (powerUpChance == 2)
+                {
+                    Instantiate(shieldBoosterPrefab, transform.position, Quaternion.identity);
+                }
+                else if (powerUpChance == 3)
+                {
+                    Instantiate(shootingBoosterPrefab, transform.position, Quaternion.identity);
+                }
+            }
+
         }
     }
 }
