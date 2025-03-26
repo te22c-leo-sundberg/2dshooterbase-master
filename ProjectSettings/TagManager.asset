@@ -11,6 +11,7 @@ TagManager:
   - ExplosionBooster
   - ShieldBooster
   - ShootingBooster
+  - BoltExplosion
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField]
     float speedX;
+    [SerializeField]
+    float dropRate;
 
     [SerializeField]
     GameObject explosionPrefab;
@@ -22,6 +24,7 @@ public class EnemyController : MonoBehaviour
     
     [SerializeField]
     GameObject shootingBoosterPrefab;
+
 
 
     // Start is called before the first frame update
@@ -73,7 +76,7 @@ public class EnemyController : MonoBehaviour
 
             controller.AddPoints(10);
 
-            if (Random.Range(1,7) == 1)
+            if (Random.Range(1,11) * dropRate >= 10)
             {
                 int powerUpChance = Random.Range(1,4);
                 if (powerUpChance == 1)

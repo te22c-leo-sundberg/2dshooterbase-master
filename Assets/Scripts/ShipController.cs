@@ -35,6 +35,8 @@ public class ShipController : MonoBehaviour
     TMP_Text pointsText;
     public static int points = 0;
 
+    [SerializeField]
+    TMP_Text shieldText;
     bool explodingShots = false;
     float explosionPowerUpTimer = 0;
     float shootingPowerUpTimer = 0;
@@ -128,6 +130,7 @@ public class ShipController : MonoBehaviour
             else
             {
                 shield--;
+                shieldText.text = shield.ToString();
             }
 
         }
@@ -150,6 +153,7 @@ public class ShipController : MonoBehaviour
         else if (boostType == "Shield")
         {
             shield++;
+            shieldText.text = shield.ToString();
         }
         else if (boostType == "Shooting")
         {
