@@ -37,6 +37,10 @@ public class ShipController : MonoBehaviour
 
     [SerializeField]
     TMP_Text shieldText;
+    [SerializeField]
+    TMP_Text explosionTimer;
+    [SerializeField]
+    TMP_Text shootingTimer;
     bool explodingShots = false;
     float explosionPowerUpTimer = 0;
     float shootingPowerUpTimer = 0;
@@ -83,6 +87,9 @@ public class ShipController : MonoBehaviour
             explosionBuff.SetActive(true);
             explodingShots = true;
             explosionPowerUpTimer -= 1 * Time.deltaTime;
+            int explosionTimerInt = (int)explosionPowerUpTimer;
+            explosionTimer.text = explosionTimerInt.ToString();
+
         }
         else if (explosionPowerUpTimer <= 0)
         {
@@ -95,6 +102,8 @@ public class ShipController : MonoBehaviour
             shootingBuff.SetActive(true);
             timeBetweenShots = 0.25f;
             shootingPowerUpTimer -= 1 * Time.deltaTime;
+            int shootingTimerInt = (int)shootingPowerUpTimer;
+            shootingTimer.text = shootingTimerInt.ToString();
         }
         else if (shootingPowerUpTimer <= 0)
         {
