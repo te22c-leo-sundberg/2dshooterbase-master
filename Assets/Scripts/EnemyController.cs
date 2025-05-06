@@ -14,6 +14,9 @@ public class EnemyController : MonoBehaviour
     float dropRate;
 
     [SerializeField]
+    float timeBetweenShot;
+
+    [SerializeField]
     GameObject explosionPrefab;
 
     [SerializeField]
